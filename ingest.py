@@ -14,6 +14,7 @@ load_dotenv()
 
 URL = "https://price-paid-data.publicdata.landregistry.gov.uk/pp-2025.csv"
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATASET_DIR = os.path.join(BASE_DIR, "datasets")
 
 
 def test_connection():
@@ -39,5 +40,22 @@ def test_connection():
         logging.error("Connection to create test table failed with: ", err)
 
 
+def extract(url, file_name="price_dataset.csv"):
+    try:
+        response_data = requests.get(url=url, timeout=30)
+        response_data.raise_for_status()
+
+        os.makedirs(DATASET_DIR, exist_ok=True)
+        file_path = os.path.join(DATASET_DIR, file_name)
+        with open(file_path, "w") as rf:
+            rf.write(response_data.text)
+        return file_path
+
+    except Exception  as err:
+        logging.error(f"Request for {file_name} failed due to {err}")
+
+
 if __name__ == "__main__":
     test_connection()
+    file_path = extract(URL, 'price_paid.csv')
+    print(file_path)
