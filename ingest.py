@@ -40,9 +40,9 @@ def test_connection():
         logging.error("Connection to create test table failed with: ", err)
 
 
-def extract(url, file_name="price_dataset.csv"):
+def extract(url, file_name="price_dataset.csv", timeout=10):
     try:
-        response_data = requests.get(url=url, timeout=30)
+        response_data = requests.get(url=url, timeout=timeout)
         response_data.raise_for_status()
 
         os.makedirs(DATASET_DIR, exist_ok=True)
@@ -51,9 +51,9 @@ def extract(url, file_name="price_dataset.csv"):
             rf.write(response_data.text)
         return file_path
 
-    except Exception  as err:
+    except Exception as err:
         logging.error(f"Request for {file_name} failed due to {err}")
-
+        return ''
 
 if __name__ == "__main__":
     test_connection()
