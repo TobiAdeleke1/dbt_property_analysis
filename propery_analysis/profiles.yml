@@ -1,0 +1,12 @@
+propery_analysis:
+  outputs:
+    dev:
+      dataset: raw_data
+      job_execution_timeout_seconds: 30
+      job_retries: 1
+      keyfile: "{{ env_var('gc_keyfile') }}"
+      location: EU
+      project: "{{ env_var('gc_project_id') }}"
+      threads: 4
+      type: bigquery
+  target: dev
