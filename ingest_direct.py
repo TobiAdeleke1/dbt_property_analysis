@@ -104,7 +104,5 @@ def clean(file_path=None):
 
 
 if '__main__'==__name__:
-    # file_path = extract(URL, 'pp.csv')
-    # print(file_path)
-    # load(KEY_FILE, file_path)
-    load(KEY_FILE, '/mnt/c/Users/damol/OneDrive/Life_After_UNI/Personal_Study/DATA_ENGINEER_2026/Claude_Help/projects_and_certificate/phase_2/projects/p1/v1/datasets/pp.csv')
+    file_path = extract(URL, 'pp.csv')
+    load(KEY_FILE, file_path)
