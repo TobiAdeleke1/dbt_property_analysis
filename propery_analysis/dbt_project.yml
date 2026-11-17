@@ -1,0 +1,18 @@
+
+name: 'propery_analysis'
+version: '1.0.0'
+profile: 'propery_analysis'
+model-paths: ["models"]
+test-paths: ["tests"]
+clean-targets:         # directories to be removed by `dbt clean`
+  - "target"
+  - "dbt_packages"
+
+# Configuring models: overridde in the individual model files using the `{{ config(...) }}` macro.
+models:
+  propery_analysis:
+    # Config indicated by + and applies to all files under models/example/
+    staging:
+      +materialized: view
+    mart:
+      +materialized: table
